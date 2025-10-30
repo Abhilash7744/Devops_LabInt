@@ -1,0 +1,28 @@
+# 1. Installation and Setup
+sudo apt update
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+docker compose version
+
+# 2. Managing Images
+docker pull ubuntu
+docker pull mysql
+docker pull nginx
+docker images
+docker image ls
+docker rmi ubuntu
+docker history mysql
+docker inspect mysql
+
+# 3. Interacting with Containers (Lifecycle)
+docker run -it --name my-container ubuntu
+docker ps
+docker ps -a
+docker stop my-container2
+docker start my-container2
