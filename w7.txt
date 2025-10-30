@@ -1,0 +1,73 @@
+Step 1: Create Your Project Files
+First, you need to create a folder for your project and add your three essential files: app.py, requirements.txt, and Dockerfile.
+
+Create a project folder:
+
+Bash
+
+mkdir myapp
+cd myapp
+(All the following files must be created inside this myapp folder.)
+
+Create the Python App (app.py): This is a minimal web application using the Flask framework.
+
+Python
+
+# This is the corrected order of the code [cite: 15, 16, 18, 20, 21, 22, 23]
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello from Dockerized Flask app!"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
+
+Create the Requirements File (requirements.txt): This file tells Python which packages to install.
+
+
+
+flask
+
+
+Create the Dockerfile: This text file instructs Docker how to build your image. name it as Dockerfile
+
+
+
+# Start from the official Python 3.9 (slim) base image [cite: 30]
+FROM python:3.9-slim
+
+# Set the working directory inside the container to /app [cite: 31]
+WORKDIR /app
+
+# Copy the requirements file into the /app directory [cite: 37]
+COPY requirements.txt .
+
+# Run pip to install the packages from requirements.txt [cite: 38]
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your project (e.g., app.py) into the /app directory [cite: 39]
+COPY . .
+
+# Tell Docker that the container will listen on port 5000 [cite: 40]
+EXPOSE 5000
+
+# Define the default command to run when the container starts [cite: 41]
+CMD ["python", "app.py"]
+At this point, your myapp folder should contain these three files.
+---------------------------------------------------------------------------------------------
+
+Step 2: Build the Docker Image
+
+
+Run the docker build command:
+docker build -t flask-docker-sample .
+
+
+Step 3: Run the Docker Container
+
+
+Run the docker run command:
+docker run -p 5000:5000 flask-docker-sample
