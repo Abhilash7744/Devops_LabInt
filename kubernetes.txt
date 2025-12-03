@@ -1,0 +1,38 @@
+1. Prerequisites
+Minikube requires a "driver" to run the Kubernetes cluster. Docker is the recommended driver for Linux.
+
+
+Install Docker (if you haven't already):
+
+Bash
+
+sudo apt update
+sudo apt install docker.io -y
+# Add your user to the docker group so you don't need sudo for every command
+sudo usermod -aG docker $USER && newgrp docker
+
+2. Install Minikube
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube version
+
+3. Install kubectl
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+kubectl version --client
+
+4. Start the Cluster
+
+minikube start --driver=docker
+
+minikube status
+
+kubectl get nodes
+
+
