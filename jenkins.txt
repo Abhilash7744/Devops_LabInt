@@ -1,0 +1,26 @@
+Step 1: Install Java (Prerequisite)
+
+sudo apt install fontconfig openjdk-17-jre
+
+java -version
+
+Step 2: Add the Jenkins Repository
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+Step 3: Install Jenkins
+
+sudo apt install Jenkins
+
+sudo systemctl start Jenkins
+
+sudo systemctl enable Jenkins
+
+sudo systemctl status Jenkins
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
