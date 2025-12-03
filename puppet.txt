@@ -1,0 +1,48 @@
+📌 Step A: Install Puppet Server (on Ubuntu)
+
+wget https://apt.puppet.com/puppet7-release-focal.deb
+
+sudo dpkg -i puppet7-release-focal.deb
+
+sudo apt update
+
+3️⃣ Install Puppet Server
+
+sudo apt install puppetserver -y
+
+4️⃣ Configure JVM memory (optional but recommended)
+
+sudo nano /etc/default/puppetserver
+
+JAVA_ARGS="-Xms512m -Xmx512m"
+
+5️⃣ Start & Enable Puppet Server
+
+sudo systemctl start puppetserver
+
+sudo systemctl enable puppetserver
+
+📌 Step B: Install Puppet Agent (Ubuntu Machines)
+
+wget https://apt.puppet.com/puppet7-release-focal.deb
+
+sudo dpkg -i puppet7-release-focal.deb
+
+sudo apt install puppet-agent -y
+
+sudo nano /etc/puppetlabs/puppet/puppet.conf
+
+[main]
+server = puppet.example.com
+
+4️⃣ Start Puppet Agent
+
+sudo systemctl start puppet
+
+sudo systemctl enable puppet
+
+# Agent verification
+
+systemctl status puppet
+
+
